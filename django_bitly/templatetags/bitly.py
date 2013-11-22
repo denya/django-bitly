@@ -14,7 +14,9 @@ def bitlify(value):
     Gets or create a Bittle object for the passed object. If unable to get
     Bittle and/or create bit.ly, will just return the get_absolute_url value.
     """
-
+    # aganzha
+    if 'localhost:8000' in value:
+        value= value.replace('localhost:8000','fn-dev.herokuapp.com')
     try:
         bittle = Bittle.objects.bitlify(value)
         if bittle:
@@ -23,6 +25,9 @@ def bitlify(value):
             url = value.get_absolute_url
         return url
     except (BittleException, Bittle.DoesNotExist):
+        # aganzha
+        if isinstance(value, basestring):
+            return value        
         return value.get_absolute_url()
 
 
