@@ -12,7 +12,10 @@ from django.contrib.sites.models import Site
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.conf import settings
-from django.utils import simplejson as json
+try:
+    import json
+except:
+    from django.utils import simplejson as json
 
 from .conf import BITLY_TIMEOUT
 from .exceptions import BittleException
